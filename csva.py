@@ -42,9 +42,9 @@ with open(file_name) as csv_file:
             else:
                 counts[col][row[col]] = 1
 
-# Sorts the dictionary by value
-# Results in a list of tuples
 for key in counts:
+    # Sorts the dictionary by value
+    # Results in a list of tuples
     sorted_count = sorted(counts[key].items(), key=lambda kv: kv[1], reverse=True)
     for tpl in sorted_count:
         print(f"{tpl[0]}: {tpl[1]}")
