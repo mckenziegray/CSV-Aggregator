@@ -10,7 +10,7 @@ for a in argv[1:]:
         break
 
 if file_name is None:
-    print("Error: No file path given")
+    print("Error: No valid file path given")
     quit(0)
 elif path.splitext(file_name)[1] != ".csv":
     print("Error: File given is not CSV")
@@ -24,11 +24,9 @@ with open(file_name) as csv_file:
     
     cols_to_report = set(reader.fieldnames).intersection(map(str.capitalize, map(str.lower, argv)))
 
-    if not len(cols_to_report) > 0:
+    if len(cols_to_report) == 0:
         # NOTE: Not sure what to do about columns with spaces in them, such as 'First Name'
-        print("Error: No valid attribute given.")
-        print("Valid attributes: " + ", ".join(reader.fieldnames))
-        quit(0)
+        cols_to_report = reader.fieldnames
 
     for row in reader:
         for col in cols_to_report:
